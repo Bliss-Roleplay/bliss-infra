@@ -1,18 +1,17 @@
-version: "3.8"
 services:
   grafana:
     image: grafana/grafana-oss:main-ubuntu
     container_name: grafana
     ports:
-      - 3000:3000
+      - 10370:3000
     volumes:
       - $DATA_DIR/grafana:/var/lib/grafana
       - $DATA_DIR/grafana/ldap.toml:/etc/grafana/ldap.toml
     environment:
-      # GF_<SectionName>_<KeyName>
-      - GF_SERVER_ROOT_URL=$GRAFANA_URL
+      #GF_<SectionName>_<KeyName>
+      - GF_SERVER_ROOT_URL=http://logs.blissroleplay.com
       - GF_DATABASE_TYPE=postgres
-      - GF_DATABASE_HOST=postgres:5432
+      - GF_DATABASE_HOST=postgres:10364
       - GF_DATABASE_USER__FILE=/run/secrets/gf_db_user
       - GF_DATABASE_PASSWORD__FILE=/run/secrets/gf_db_pass
       - GF_DATABASE_SSL_MODE=disable
@@ -24,7 +23,7 @@ services:
       - GF_AUTH_LDAP_ENABLED=true
       - GF_AUTH_LDAP_ALLOW_SIGN_UP=true
       - GF_LDAP_HOST=lldap
-      - GF_LDAP_PORT=3890
+      - GF_LDAP_PORT=10360
     networks:
       - gw_default
     secrets:
@@ -39,11 +38,12 @@ services:
     image: grafana/loki:3.0.0
     container_name: loki
     ports:
-      - 3100:3100
-      #- 9093
-      #- 9096
+      - 10371:3100
+      - 10372:9093
+      - 10373:9096
     volumes:
       - $DATA_DIR/loki/loki-config.yaml:/etc/loki/loki-config.yaml
+      - $DATA_DIR/loki:/var/loki
     command: -config.file=/etc/loki/loki-config.yaml
 secrets:
   gf_db_user:
