@@ -1,6 +1,9 @@
 constants:
   pg_user: "${PG_USER}"
   pg_password: "${PG_PASS}"
+  maria_user: "${MARIA_USER}"
+  maria_password: "${MARIA_PASS}"
+  
 
 source_directories: []
 
@@ -9,6 +12,8 @@ repositories:
     label: local
 
 archive_name_format: 'db-backup-{now:%Y-%m-%d-%H%M%S}'
+
+read_special: true
 
 sqlite_databases:
   # gw
@@ -29,6 +34,13 @@ postgresql_databases:
     # custom?
     format: directory
     #ssl_mode: disable
+
+mariadb_databases:
+  - name: all
+    hostname: host.docker.internal
+    username: "{maria_user}"
+    password: "{maria_password}"
+    format: sql
 
 after_backup:
   - echo Syncing backups
