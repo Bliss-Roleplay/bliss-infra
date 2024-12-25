@@ -1,4 +1,5 @@
 constants:
+  name: "db-backup"
   pg_user: "${PG_USER}"
   pg_password: "${PG_PASS}"
   maria_user: "${MARIA_USER}"
@@ -44,7 +45,7 @@ mariadb_databases:
 
 after_backup:
   - echo Syncing backups
-  - rclone sync /mnt/backup/db bb:phoenix0/db --progress --stats-one-line --stats 1s
+  - rclone sync /mnt/backup/db bb:blissrp/db --progress --stats-one-line --stats 1s
   - rclone sync /mnt/backup/db koofr:/db --progress --stats-one-line --stats 1s
   - rclone sync /mnt/backup/db gdrive:/db --progress --stats-one-line --stats 1s
   - echo Finished backup sync

@@ -8,7 +8,7 @@
 ## Required enviornment variables for commands
 
 ```
-export BORG_PASSPHRASE=$(cat /run/secrets/borg_pp) && export PG_USER=$(cat /run/secrets/pg_user) && export PG_PASS=$(cat /run/secrets/pg_pass) && export SMTP_PASS=$(cat /run/secrets/smtp_pass) && <command>
+export BORG_PASSPHRASE=$(cat /run/secrets/borg_pp) && export PG_USER=$(cat /run/secrets/pg_user) && export PG_PASS=$(cat /run/secrets/pg_pass) && export MARIA_PASS=$(cat /run/secrets/maria_pass) && export SMTP_PASS=$(cat /run/secrets/smtp_pass) && <command>
 ```
 
 # Remote backups

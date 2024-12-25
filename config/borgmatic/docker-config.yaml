@@ -1,3 +1,6 @@
+constants:
+  name: "docker-backup"
+
 source_directories:
   - /mnt/source/docker/
 
@@ -31,7 +34,7 @@ archive_name_format: 'docker-backup-{now:%Y-%m-%d-%H%M%S}'
 
 after_backup:
   - echo Syncing backups
-  - rclone sync /mnt/backup/docker bb:phoenix0/docker --progress --stats-one-line --stats 1s
+  - rclone sync /mnt/backup/docker bb:blissrp/docker --progress --stats-one-line --stats 1s
   - rclone sync /mnt/backup/docker koofr:/docker --progress --stats-one-line --stats 1s
   - rclone sync /mnt/backup/docker gdrive:/docker --progress --stats-one-line --stats 1s
   - echo Finished backup sync
