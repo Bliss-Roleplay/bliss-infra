@@ -8,6 +8,8 @@ services:
       - FILE__BORG_PASSPHRASE=/run/secrets/borg_pp
       - FILE__PG_USER=/run/secrets/pg_user
       - FILE__PG_PASS=/run/secrets/pg_pass
+      - MARIA_USER=$MARIA_USER
+      - FILE__MARIA_PASS=/run/secrets/maria_pass
       - SMTP_HOST=$SMTP_HOST
       - SMTP_USER=$SMTP_USER
       - FILE__SMTP_PASS=/run/secrets/smtp_pass
@@ -29,6 +31,7 @@ services:
       - borg_pp
       - pg_user
       - pg_pass
+      - maria_pass
       - smtp_pass
     restart: always
 networks:
@@ -41,5 +44,7 @@ secrets:
     file: $SECRET_DIR/POSTGRES_USER
   pg_pass:
     file: $SECRET_DIR/POSTGRES_PASSWORD
+  maria_pass:
+    file: $SECRET_DIR/MARIA_PASSWORD
   smtp_pass:
     file: $SECRET_DIR/SMTP_PASSWORD
